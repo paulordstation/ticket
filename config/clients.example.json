@@ -1,0 +1,12 @@
+{
+  "Empresa Exemplo": {
+    "boardId": "ID_DO_BOARD_NO_TRELLO",
+    "lists": {
+      "Acessos": "ID_DA_LISTA_ACESSOS",
+      "RD Marketing": "ID_DA_LISTA_RD_MARKETING",
+      "Estratégia": "ID_DA_LISTA_ESTRATEGIA",
+      "Relatoria": "ID_DA_LISTA_RELATORIA",
+      "Finalizado": "ID_DA_LISTA_FINALIZADO"
+    }
+  }
+}

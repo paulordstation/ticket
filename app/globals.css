@@ -1,0 +1,54 @@
+@import "tailwindcss";
+
+:root {
+  --background: #0a0a0b;
+  --surface: #17171a;
+  --surface-2: #1e1e22;
+  --border: #2a2a2f;
+  --foreground: #f4f4f5;
+  --muted: #9a9aa2;
+  --accent: #ff6a1a;
+  --accent-hover: #ff8542;
+  --accent-foreground: #1a0800;
+  --danger: #f87171;
+  --success: #4ade80;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-border: var(--border);
+  --color-foreground: var(--foreground);
+  --color-muted: var(--muted);
+  --color-accent: var(--accent);
+  --color-accent-hover: var(--accent-hover);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-danger: var(--danger);
+  --color-success: var(--success);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+html {
+  color-scheme: dark;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+}
+
+input,
+select,
+textarea {
+  color-scheme: dark;
+}
+
+input:-webkit-autofill,
+select:-webkit-autofill,
+textarea:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0 1000px var(--surface-2) inset !important;
+  -webkit-text-fill-color: var(--foreground) !important;
+}
