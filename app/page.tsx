@@ -149,7 +149,7 @@ export default function HomePage() {
           fogDepth={14}
           detail="medium"
           brightness={0.85}
-          opacity={0.32}
+          opacity={0.6}
           mouseInteraction={false}
           grain
           grainIntensity={0.035}
@@ -162,7 +162,7 @@ export default function HomePage() {
         </Reveal>
 
         <Reveal delay={90}>
-          <div className="mt-8 rounded-2xl border border-border bg-surface p-6 shadow-2xl shadow-[0_0_60px_-15px_rgba(255,106,26,0.35)] sm:p-8">
+          <div className="mt-8 rounded-2xl border border-border bg-surface p-6 shadow-[0_25px_60px_-20px_rgba(0,0,0,0.5),0_0_130px_-30px_rgba(255,106,26,0.16)] sm:p-8">
             {step === "company" && (
               <CompanyStep
                 value={companyInput}
