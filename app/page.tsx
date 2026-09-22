@@ -7,6 +7,8 @@ import { inputClass, labelClass, primaryButtonClass, secondaryButtonClass } from
 
 const GradientWaves = dynamic(() => import("@/components/GradientWaves"), { ssr: false });
 
+const APP_VERSION = "ALPHA 1.1";
+
 type Step = "company" | "form" | "success";
 
 interface DemandFormState {
@@ -132,6 +134,10 @@ export default function HomePage() {
 
   return (
     <main className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden px-4 py-12">
+      <div className="fixed left-4 top-4 z-10 rounded-full border border-border bg-surface/80 px-3 py-1 text-[11px] font-semibold uppercase tracking-wider text-muted backdrop-blur-sm">
+        {APP_VERSION}
+      </div>
+
       <div className="pointer-events-none fixed inset-0 -z-10">
         <GradientWaves
           horizonColor="#0a0a0b"
