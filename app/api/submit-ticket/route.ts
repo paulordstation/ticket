@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { findClient } from "@/lib/clients";
-import { extractTicketWithClaude } from "@/lib/claude";
+import { extractTicketWithGroq } from "@/lib/groq";
 import { createCardWithChecklist } from "@/lib/trello";
 
 interface SubmitTicketBody {
@@ -43,7 +43,7 @@ export async function POST(request: NextRequest) {
   }
 
   try {
-    const extracted = await extractTicketWithClaude({
+    const extracted = await extractTicketWithGroq({
       titulo,
       descricao,
       prazo: prazo || null,

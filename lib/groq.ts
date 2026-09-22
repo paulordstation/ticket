@@ -1,6 +1,5 @@
-const ANTHROPIC_API_URL = "https://api.anthropic.com/v1/messages";
-const ANTHROPIC_VERSION = "2023-06-01";
-const MODEL = "claude-haiku-4-5-20251001";
+const GROQ_API_URL = "https://api.groq.com/openai/v1/chat/completions";
+const MODEL = "llama-3.3-70b-versatile";
 
 const SYSTEM_PROMPT = `Você organiza solicitações de clientes de uma consultoria em cards de Trello.
 A partir do título, descrição, prazo e prioridade informados, produza um card claro e acionável para a equipe.
@@ -27,25 +26,12 @@ export interface RawTicketInput {
   prioridade?: string | null;
 }
 
-interface AnthropicContentBlock {
-  type: string;
-  text?: string;
+interface GroqChoice {
+  message?: { content?: string };
 }
 
-interface AnthropicResponse {
-  content: AnthropicContentBlock[];
-}
-
-function extractJson(text: string): unknown {
-  try {
-    return JSON.parse(text);
-  } catch {
-    const match = text.match(/\{[\s\S]*\}/);
-    if (!match) {
-      throw new Error("Não foi possível interpretar o JSON retornado pelo Claude.");
-    }
-    return JSON.parse(match[0]);
-  }
+interface GroqResponse {
+  choices: GroqChoice[];
 }
 
 function isTicketExtraction(value: unknown): value is TicketExtraction {
@@ -60,10 +46,10 @@ function isTicketExtraction(value: unknown): value is TicketExtraction {
   );
 }
 
-export async function extractTicketWithClaude(input: RawTicketInput): Promise<TicketExtraction> {
-  const apiKey = process.env.ANTHROPIC_API_KEY;
+export async function extractTicketWithGroq(input: RawTicketInput): Promise<TicketExtraction> {
+  const apiKey = process.env.GROQ_API_KEY;
   if (!apiKey) {
-    throw new Error("ANTHROPIC_API_KEY não configurada.");
+    throw new Error("GROQ_API_KEY não configurada.");
   }
 
   const userContent = [
@@ -73,35 +59,36 @@ export async function extractTicketWithClaude(input: RawTicketInput): Promise<Ti
     `Prioridade: ${input.prioridade ?? "não informada"}`,
   ].join("\n");
 
-  const response = await fetch(ANTHROPIC_API_URL, {
+  const response = await fetch(GROQ_API_URL, {
     method: "POST",
     headers: {
       "content-type": "application/json",
-      "x-api-key": apiKey,
-      "anthropic-version": ANTHROPIC_VERSION,
+      authorization: `Bearer ${apiKey}`,
     },
     body: JSON.stringify({
       model: MODEL,
-      max_tokens: 1024,
-      system: SYSTEM_PROMPT,
-      messages: [{ role: "user", content: userContent }],
+      response_format: { type: "json_object" },
+      messages: [
+        { role: "system", content: SYSTEM_PROMPT },
+        { role: "user", content: userContent },
+      ],
     }),
   });
 
   if (!response.ok) {
     const errorText = await response.text();
-    throw new Error(`Falha na API do Claude (${response.status}): ${errorText}`);
+    throw new Error(`Falha na API do Groq (${response.status}): ${errorText}`);
   }
 
-  const data = (await response.json()) as AnthropicResponse;
-  const textBlock = data.content?.find((block) => block.type === "text" && block.text);
-  if (!textBlock?.text) {
-    throw new Error("Resposta da API do Claude sem conteúdo de texto.");
+  const data = (await response.json()) as GroqResponse;
+  const content = data.choices?.[0]?.message?.content;
+  if (!content) {
+    throw new Error("Resposta da API do Groq sem conteúdo.");
   }
 
-  const parsed = extractJson(textBlock.text);
+  const parsed = JSON.parse(content);
   if (!isTicketExtraction(parsed)) {
-    throw new Error("JSON retornado pelo Claude está incompleto ou em formato inválido.");
+    throw new Error("JSON retornado pelo Groq está incompleto ou em formato inválido.");
   }
 
   return parsed;

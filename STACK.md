@@ -1,8 +1,10 @@
-# App de Tickets → Trello (via Claude API)
+# App de Tickets → Trello (via Groq API)
 
 ## Visão geral
 
-Aplicação web simples, sem login. O cliente acessa a página, informa o **nome da empresa**, o sistema localiza o board correto do Trello, e o cliente preenche um formulário de demanda. O conteúdo é interpretado pela API do Claude e vira um card no Trello, na lista e posição corretas.
+Aplicação web simples, sem login. O cliente acessa a página, informa o **nome da empresa**, o sistema localiza o board correto do Trello, e o cliente preenche um formulário de demanda. O conteúdo é interpretado pela API do Groq e vira um card no Trello, na lista e posição corretas.
+
+> Nota: o desenho original deste documento usava a API do Claude/Anthropic para a interpretação do texto. O projeto foi migrado para a API do Groq (mais barata/gratuita para esse volume) — a arquitetura e o restante do fluxo permanecem os mesmos, só a integração de IA em `lib/` muda.
 
 Deploy: **Vercel**.
 
@@ -14,7 +16,7 @@ Deploy: **Vercel**.
    - Não encontrou → mostra mensagem de erro ("empresa não localizada, entre em contato")
 3. Cliente preenche o formulário de demanda (ver campos sugeridos abaixo)
 4. Frontend envia os dados para uma API route
-5. A API route chama a **API do Claude**, pedindo que o conteúdo seja transformado em JSON estruturado: título, descrição, checklist (lista de itens) e data de entrega
+5. A API route chama a **API do Groq**, pedindo que o conteúdo seja transformado em JSON estruturado: título, descrição, checklist (lista de itens) e data de entrega
 6. A API route valida o JSON retornado
 7. A API route chama a **API REST do Trello** diretamente (sem MCP/agente):
    - `POST /1/cards` → cria o card no board/lista certos, com `pos` (ex: `top`)
@@ -31,7 +33,7 @@ Deploy: **Vercel**.
 ### Variáveis de ambiente (configuradas na Vercel)
 
 ```
-ANTHROPIC_API_KEY=
+GROQ_API_KEY=
 TRELLO_API_KEY=
 TRELLO_TOKEN=
 ```
@@ -62,14 +64,15 @@ A busca pelo nome da empresa deve ser case-insensitive e tolerar pequenas varia�
 - Nome da empresa (já preenchido, vindo da etapa anterior)
 - Tipo de demanda (select — mapeia para a lista do Trello, ex: "RD Marketing", "Estratégia")
 - Título/resumo da solicitação
-- Descrição detalhada (texto livre — é o que o Claude vai interpretar)
+- Descrição detalhada (texto livre — é o que o Groq vai interpretar)
 - Prazo desejado (data, opcional)
 - Prioridade (opcional: baixa/média/alta)
 
-## Chamada à API do Claude
+## Chamada à API do Groq
 
-- Endpoint: `https://api.anthropic.com/v1/messages`
-- Modelo sugerido: `claude-haiku-4-5-20251001` (tarefa de extração estruturada simples — mais barato e rápido; migrar para um modelo maior só se a qualidade da interpretação não for suficiente)
+- Endpoint: `https://api.groq.com/openai/v1/chat/completions` (compatível com o formato OpenAI)
+- Modelo sugerido: `llama-3.3-70b-versatile` (tarefa de extração estruturada simples; migrar para um modelo maior/menor conforme custo x qualidade)
+- Usa `response_format: { type: "json_object" }` para forçar saída em JSON válido
 - Prompt de sistema deve pedir **apenas JSON**, sem texto adicional, no formato:
 
 ```json
@@ -99,11 +102,11 @@ A busca pelo nome da empresa deve ser case-insensitive e tolerar pequenas varia�
 /app
   /page.tsx                  → formulário (empresa → demanda)
   /api
-    /submit-ticket/route.ts  → orquestra Claude + Trello
+    /submit-ticket/route.ts  → orquestra Groq + Trello
 /config
   /clients.json               → mapeamento empresa → board/lista
 /lib
-  /claude.ts                  → chamada à API do Claude
+  /groq.ts                    → chamada à API do Groq
   /trello.ts                  → chamadas à API do Trello
 .env.local
 ```
@@ -113,7 +116,7 @@ A busca pelo nome da empresa deve ser case-insensitive e tolerar pequenas varia�
 1. Inicializar projeto Next.js (App Router, TypeScript)
 2. Criar página com etapa 1 (nome da empresa → valida contra `clients.json`) e etapa 2 (formulário de demanda)
 3. Criar `app/api/submit-ticket/route.ts`
-4. Implementar `lib/claude.ts` (chamada à Messages API, parse do JSON)
+4. Implementar `lib/groq.ts` (chamada à API do Groq, parse do JSON)
 5. Implementar `lib/trello.ts` (criar card, criar checklist, adicionar itens)
 6. Popular `config/clients.json` com os primeiros clientes/boards reais
 7. Testar o fluxo completo localmente

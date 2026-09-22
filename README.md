@@ -1,6 +1,6 @@
 # Central de Tickets — Flecha Consultoria
 
-Aplicação web (Next.js) sem login: o cliente informa o nome da empresa, preenche um formulário de demanda, e a solicitação é interpretada pela API do Claude e registrada como card no Trello.
+Aplicação web (Next.js) sem login: o cliente informa o nome da empresa, preenche um formulário de demanda, e a solicitação é interpretada pela API do Groq e registrada como card no Trello.
 
 Ver [STACK.md](./STACK.md) para o desenho completo do projeto.
 
@@ -15,7 +15,7 @@ Ver [STACK.md](./STACK.md) para o desenho completo do projeto.
 2. Copie `.env.local.example` para `.env.local` e preencha as chaves:
 
    ```
-   ANTHROPIC_API_KEY=
+   GROQ_API_KEY=
    TRELLO_API_KEY=
    TRELLO_TOKEN=
    ```
@@ -48,12 +48,12 @@ Ver [STACK.md](./STACK.md) para o desenho completo do projeto.
 /app
   /page.tsx                     → fluxo em duas etapas (empresa → demanda)
   /api/check-client/route.ts    → valida a empresa contra config/clients.json
-  /api/submit-ticket/route.ts   → orquestra Claude + Trello
+  /api/submit-ticket/route.ts   → orquestra Groq + Trello
 /config
   /clients.json                 → mapeamento empresa → board/lista (editar manualmente)
 /lib
   /clients.ts                   → busca de cliente (case-insensitive)
-  /claude.ts                    → chamada à Messages API do Claude
+  /groq.ts                      → chamada à API do Groq (chat completions)
   /trello.ts                    → criação de card + checklist no Trello
 ```
 
