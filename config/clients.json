@@ -1,1 +1,247 @@
-{}
+{
+  "Médico das Canetas": {
+    "boardId": "6a2eb3272ed56aecef5788c6",
+    "lists": {
+      "Acessos": "6a2eb362784e634003636826",
+      "RD Station Marketing": "6a2eb36a591c2fa8aebf7db2",
+      "RD Station Estratégia -": "6a2eb373eac14290aca79b08",
+      "Relatórios das campanhas": "6a7e4dbb87416b6c82d5dd2a",
+      "Copy": "6a393275192a47b18821db8f",
+      "Design - Redes Sociais e E-mails": "6a2eb3823d886cb589e2efcd",
+      "Criativos": "6a4d627f79b21be55f20338c",
+      "Tráfego Pago - Google ADS": "6a2eb38ac99d965d1b958234",
+      "SEO": "6a2eb3989b1eff085411839c",
+      "Estratégia Marketing": "6a3aafebb589c90e14f0faa2",
+      "Curva A - Canetas": "6a31bb5dc4c96d2fa5a59d90",
+      "Curva A - Cargas e Cartuchos": "6a31bc304d19f3d32fc15c08"
+    }
+  },
+  "Solvis": {
+    "boardId": "6a90145bbe9c25cf560a9507",
+    "lists": {
+      "Acessos": "6a901461f99f3397df016bf4",
+      "RD Marketing - Configuração": "6a90146672746e02e27e6b9a",
+      "RDSM - Estratégia": "6a90146a64d8324ef78d38bd",
+      "Relatoria": "6a90146dd11f41dd4fc22ca5"
+    }
+  },
+  "Opimed": {
+    "boardId": "6a7f591c948c9252663c0303",
+    "lists": {
+      "Acessos": "6a84553ce485d6449e524518",
+      "RD Marketing - Configuração": "6a84553f5fb1d64021545657",
+      "RD Marketing Estratégia": "6a84554802f2b9f3ff49a102",
+      "RD CRM": "6a8455455f26dba931f28098",
+      "Solicitações Opimed": "6aa410f653b0b469ea9c7805",
+      "Relatórios": "6a84a649ab703a6c97616bbe"
+    }
+  },
+  "Eurodynamic": {
+    "boardId": "6a901412f09fa8cf07f98205",
+    "lists": {
+      "Acessos": "6a90141687efd3caddc9faba",
+      "RD Marketing": "6a90141ac98c170cd83e11a3",
+      "Estratégia": "6a90141f3ab73761e754f56b",
+      "Relatoria": "6a901423f9f907c065b9355b"
+    }
+  },
+  "SP Labor": {
+    "boardId": "6973d0a5bea7d1237aa00ede",
+    "lists": {
+      "RD Station": "6973d0a5bea7d1237aa00f20",
+      "RD CRM -": "69d50c4c12a6a678c9cc6b9e",
+      "Demandas da semana - Copy": "6973d0a5bea7d1237aa00f1f",
+      "Design": "6981178b638ff249c595b534"
+    }
+  },
+  "NVersos": {
+    "boardId": "6a4545004527f0d17c29d41a",
+    "lists": {
+      "Acessos": "6a454571e3963eb183eb9b0b",
+      "RD Station Marketing Configuração": "6a45457e4278c0914d589657",
+      "RD Station Marketing - Estratégias": "6a45458a4b95fe840eb342d0",
+      "RD Conversas": "6a45458f17b43a0bad2ebf24",
+      "RD CRM": "6a454592a3130ce34a1c0860"
+    }
+  },
+  "Tapeçaria Cazati": {
+    "boardId": "6a0dced117cfc6620194ea18",
+    "lists": {
+      "Acessos": "6a0dcee532b4249fbb6dd96a",
+      "RD Station Marketing - Configuração": "6a0dcf58020827f8076535b4",
+      "RD Station Marketing Estratégias": "6a0dcf8a89a08ef6f8c29601",
+      "RD Conversas": "6a0dcf921a3ad82359deeb56"
+    }
+  },
+  "Colven": {
+    "boardId": "6a90142b1f92dce72e005939",
+    "lists": {
+      "Acessos": "6a90142f5760bfd2f4f8c757",
+      "RD Marketing - Configuração": "6a901434e28755bd9740912a",
+      "RDSM - Estratégia": "6a901438238b646db951f8c7",
+      "Relatoria": "6a90143c7b537a561dc3cae0"
+    }
+  },
+  "Pro Smart": {
+    "boardId": "6aa6fcee69b0ae88820b1844",
+    "lists": {
+      "Acessos": "6aa6fcf3c79a58cb44cdf560",
+      "RD Marketing - Configuração": "6aa6fcfd99c828f2fa9be20e",
+      "RD Marketing - Estratégia": "6aa6fd05f79622fc6aa5438a",
+      "RD CRM": "6aa856962415832a39077cfa",
+      "Site": "6aa6fd093d318e0dcac5861a",
+      "Tráfego Pago": "6aa6fd0d02761b64619f2516"
+    }
+  },
+  "Bonardi": {
+    "boardId": "6a9013bbff688fd063a6caa4",
+    "lists": {
+      "Acessos": "6a9013bfb08f29ae0609d191",
+      "RD Marketing - Configuração": "6a9013c269c3380b64a0fbff",
+      "RDSM - Estratégia": "6a9013c73d4d22c958469fbc",
+      "RD CRM": "6aa0b8c903cb8690be8e052d",
+      "RDC": "6aa0b8d3a2439080eefb7673",
+      "Relatoria": "6a9013cb92581de8889e33f7"
+    }
+  },
+  "Casarão do Vale": {
+    "boardId": "69ea43de2c4660e6bbe20711",
+    "lists": {
+      "Acessos e Docs. Importantes": "69ea440acd3d1d4dd2dfc9d8",
+      "RD Marketing Configuração": "69ea44242a23f0af54806319",
+      "RD Marketing - Estratégia": "69ee988cff38961ccb2ae989",
+      "RD CRM": "69ea4427f46548e5d7a31b0c"
+    }
+  },
+  "Medley": {
+    "boardId": "6a9013f59f2e8c2b0aa1cc27",
+    "lists": {
+      "Acessos": "6a9013fcc7266857bb3ca737",
+      "RD Marketing - Configuração": "6a9014004d308f575e92a980",
+      "RD Marketing Estratégia": "6a901404ea4486ae71d240b6",
+      "RDC": "6a90140a15da5070bd98035f"
+    }
+  },
+  "GP Conta": {
+    "boardId": "6a2eb3e3a96d28f94ef8ec78",
+    "lists": {
+      "Acessos": "6a2f356355b29fc4e066b449",
+      "RD Station - Configuração": "6a2f356cc3f79cdfee4b8bc7",
+      "RD Station Estratégia": "6a2f3574287bea2958bbcdc5",
+      "Design": "6a31b40ac1eb867f6582fee7",
+      "Tráfego Pago": "6a2f3581db8f84d5acfa41c0",
+      "Redes Sociais": "6a31ba7a3bfd2dcc3284f55c"
+    }
+  },
+  "Aço Logis": {
+    "boardId": "69eaaaf03f2b4e670fb398f1",
+    "lists": {
+      "Acessos": "69eaaaf03f2b4e670fb398ed",
+      "RD Station - Configuração -  Murilo -": "69eaaaf03f2b4e670fb398ec",
+      "RD Station - Estratégia -  Murilo - Karina e Nathalia": "6a6937574700d66f28281f11",
+      "RD CRM - Murilo, Natalia e Edilson": "69f394da70907a6d659943f0",
+      "Rede Social + Copy - Flavia - Ka": "69eaaaf03f2b4e670fb398eb",
+      "Design - Rodrigo - Ka": "69eaaaf03f2b4e670fb398e9",
+      "Ajuste - Copy e design": "69fcb3a9f747730c76ea1cf3",
+      "Agendar publicações": "69fc91e645db1284b29d03f2"
+    }
+  },
+  "Attos Serviços de Alimentação": {
+    "boardId": "6a18cfaa33fdd52daf9e08c6",
+    "lists": {
+      "Acessos + Docs. Importantes": "6a19bb9fa417234634eb90c7",
+      "RD Station - Configuração": "6a19bbdb342498831c3b6ed8",
+      "RD CRM": "6a19bc131f101f6cfdde44cc",
+      "RD Station - Estratégia": "6a19bbf205abe7173912641e",
+      "Copy": "6a1d7a269c0dd3adacc85af0",
+      "Marketing Planejamento": "6a19bc28b6ff945010e29a42",
+      "Anúncios": "6a19bc2f7712714bb28b199a",
+      "Relatórios": "6a19bcfa817667d4c0f4cdc1"
+    }
+  },
+  "Te Guarani": {
+    "boardId": "6a9014a7d911d0a0203873bf",
+    "lists": {
+      "Acessos": "6a9014ac5311b5bece7f2945",
+      "RD Marketing": "6a9014b20272497839b67930",
+      "Estratégia": "6a9014b6eada71d1aed5f91f",
+      "Relatoria": "6a9014bc2520d13fc4a8eb6e"
+    }
+  },
+  "Pratick Extintores": {
+    "boardId": "6a10b8985a0e578886e88b9b",
+    "lists": {
+      "Acessos": "6a10b8cdac6e5f388ae9390f",
+      "RD Station Configuração": "6a10b8dad3ceff687e8f8bab",
+      "RD Station - Estratégia": "6a10b8e41d7b886ed76490f4",
+      "RD CRM": "6a11bbadc043396b7c94da11"
+    }
+  },
+  "Pastre": {
+    "boardId": "6a9014430ef375125c380666",
+    "lists": {
+      "Acessos": "6a901447f64d32875749a5a1",
+      "RD Marketing - Configuração": "6a90144c22a2c38abd4fd896",
+      "RDSM - Estratégia": "6a90145059ffbb5c83e4301b",
+      "RD CRM": "6aa0b8e2bf5eb9ed4498671e",
+      "RDC": "6aa0b8e9bbe78e74983cf536",
+      "Relatoria": "6a9014544dbd355274bb3195"
+    }
+  },
+  "Data Cempro": {
+    "boardId": "6a923a4219d757f18d4edc40",
+    "lists": {
+      "Acessos": "6a923a8a14b62f204b3e5c62",
+      "RD Marketing - Configuração": "6a923aae1e536058ee91c304",
+      "RD Marketing - Estratégia": "6a923ab4685d7e8640f2b6aa",
+      "RD Conversas": "6a923abdc9405bf133d59e54"
+    }
+  },
+  "Cozinhe Comigo": {
+    "boardId": "6a11ba07c9b4c9a7ca78dc46",
+    "lists": {
+      "Acessos": "6a11ba0d9817ac017502af99",
+      "RD Station Marketing": "6a11ba17a5f9bf065b9464b8",
+      "RD Station Estratégia": "6a11ba223a5cd4a63950de0d",
+      "Conteúdos Semanais": "6a3c11c07108634e880814cf"
+    }
+  },
+  "Panobianco": {
+    "boardId": "69c68ccbf8e3eb80bec32f50",
+    "lists": {
+      "Acessos & Docs. Importantes": "69c68da89e17165fbebca39a",
+      "RD CRM - Murilo": "69c68db3a858b227eee4789c",
+      "RD Marketing - Estratégia - Murilo/Dani e Rafa": "69c68dba107d27bd016ca64a"
+    }
+  },
+  "Drogapi": {
+    "boardId": "6a70e4284e8f1d0ad4db41df",
+    "lists": {
+      "Acessos": "6a70e44d2ce003021d7f5084",
+      "RD Marketing - Configurações": "6a70e45934361e2612503567",
+      "RD Station - Estratégia": "6a70e461a7ca763d67d3dfc8",
+      "Relatório": "6a70f28fe5bd6b26b780d138"
+    }
+  },
+  "Flecha Consultoria": {
+    "boardId": "6a620bade7bfc8fbde387e3a",
+    "lists": {
+      "ACESSOS - DOCUMENTOS & LINKS": "6a620bcf1530622090df1969",
+      "Estratégias RDSM": "6a845dff44f13bf64bda9007",
+      "Estratégias para E-commerce": "6a845e9bfd4117c487843a92",
+      "Estratégias para B2B": "6a845ea90da9e85a959fec97",
+      "WhatsApp": "6a8f779436684ca70a6fe42e",
+      "Lead Scoring": "6a8465929437c384e8c431b8",
+      "Demandas - Novas": "6aa9a8a8149ae5c6e05a54b0"
+    }
+  },
+  "Hi-mix": {
+    "boardId": "6a9014754e54d8bc5935cd4d",
+    "lists": {
+      "Acessos": "6a90147a79d58a2237bc4fc3",
+      "RD Marketing - Configuração": "6a90147ed73a96b64cc9b855",
+      "RDSM - Estratégia": "6a9014818b5348ecea94b8f3",
+      "Relatoria": "6a90148806294aae0f03f493"
+    }
+  }
+}

@@ -12,13 +12,15 @@ Ver [STACK.md](./STACK.md) para o desenho completo do projeto.
    npm install
    ```
 
-2. Copie `.env.local.example` para `.env.local` e preencha as chaves:
+2. Crie um arquivo `.env.local` na raiz do projeto com:
 
    ```
    GROQ_API_KEY=
    TRELLO_API_KEY=
    TRELLO_TOKEN=
    ```
+
+   Esse arquivo nunca é versionado (está no `.gitignore`) — cada ambiente (local, Vercel) mantém suas próprias chaves.
 
 3. Popule `config/clients.json` com os clientes reais (veja `config/clients.example.json` para o formato esperado):
 
