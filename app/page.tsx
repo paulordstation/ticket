@@ -138,7 +138,7 @@ export default function HomePage() {
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-center px-4 py-12">
-      <div className="w-full max-w-md">
+      <div className="w-full max-w-md animate-fade-in-up">
         <BrandHeader />
 
         <div className="mt-8 rounded-2xl border border-border bg-surface p-6 shadow-2xl shadow-black/40 sm:p-8">
@@ -184,7 +184,7 @@ function BrandHeader() {
       <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-accent/10">
         <ArrowIcon />
       </div>
-      <h1 className="mt-4 text-xl font-semibold tracking-tight text-foreground">
+      <h1 className="mt-4 text-3xl font-bold uppercase tracking-wide text-foreground sm:text-4xl">
         Flecha <span className="text-accent">Consultoria</span>
       </h1>
       <p className="mt-1 text-sm text-muted">Abra uma solicitação de demanda</p>

@@ -71,7 +71,7 @@ A busca pelo nome da empresa deve ser case-insensitive e tolerar pequenas varia�
 ## Chamada à API do Groq
 
 - Endpoint: `https://api.groq.com/openai/v1/chat/completions` (compatível com o formato OpenAI)
-- Modelo sugerido: `llama-3.3-70b-versatile` (tarefa de extração estruturada simples; migrar para um modelo maior/menor conforme custo x qualidade)
+- Modelo sugerido: `openai/gpt-oss-20b` (tarefa de extração estruturada simples; a Groq roda uma lista rotativa de modelos hospedados — confira `GET /openai/v1/models` se o modelo configurado parar de existir)
 - Usa `response_format: { type: "json_object" }` para forçar saída em JSON válido
 - Prompt de sistema deve pedir **apenas JSON**, sem texto adicional, no formato:
 

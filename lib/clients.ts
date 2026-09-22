@@ -10,7 +10,12 @@ type ClientsMap = Record<string, ClientBoardConfig>;
 const clientsMap = clientsData as ClientsMap;
 
 function normalize(value: string): string {
-  return value.trim().toLowerCase().replace(/\s+/g, " ");
+  return value
+    .normalize("NFD")
+    .replace(/[̀-ͯ]/g, "")
+    .trim()
+    .toLowerCase()
+    .replace(/\s+/g, " ");
 }
 
 export interface FoundClient {
@@ -33,4 +38,8 @@ export function findClient(companyName: string): FoundClient | null {
 
 export function getDemandTypes(config: ClientBoardConfig): string[] {
   return Object.keys(config.lists);
+}
+
+export function getAllClientNames(): string[] {
+  return Object.keys(clientsMap);
 }

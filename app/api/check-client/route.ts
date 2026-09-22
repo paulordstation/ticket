@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
-import { findClient, getDemandTypes } from "@/lib/clients";
+import { findClient, getAllClientNames, getDemandTypes } from "@/lib/clients";
+import { resolveClientName } from "@/lib/groq";
 
 export async function POST(request: NextRequest) {
   let body: unknown;
@@ -18,7 +19,22 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: "Informe o nome da empresa." }, { status: 400 });
   }
 
-  const client = findClient(companyName);
+  let client = findClient(companyName);
+
+  if (!client) {
+    const knownNames = getAllClientNames();
+    let resolvedName: string | null = null;
+    try {
+      resolvedName = await resolveClientName(companyName, knownNames);
+    } catch (error) {
+      console.error("Erro ao resolver nome da empresa via Groq:", error);
+    }
+
+    if (resolvedName) {
+      client = findClient(resolvedName);
+    }
+  }
+
   if (!client) {
     return NextResponse.json({ found: false });
   }
