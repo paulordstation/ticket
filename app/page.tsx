@@ -1,6 +1,11 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
+import dynamic from "next/dynamic";
+import { useState, type FormEvent, type ReactNode } from "react";
+import { DatePicker } from "@/components/DatePicker";
+import { inputClass, labelClass, primaryButtonClass, secondaryButtonClass } from "@/components/ui";
+
+const GradientWaves = dynamic(() => import("@/components/GradientWaves"), { ssr: false });
 
 type Step = "company" | "form" | "success";
 
@@ -19,17 +24,6 @@ const EMPTY_FORM: DemandFormState = {
   prazo: "",
   prioridade: "",
 };
-
-const inputClass =
-  "w-full rounded-lg border border-border bg-surface-2 px-3 py-2.5 text-sm text-foreground placeholder:text-muted/70 outline-none transition focus:border-accent focus:ring-2 focus:ring-accent/25";
-
-const labelClass = "mb-1.5 block text-sm font-medium text-muted";
-
-const primaryButtonClass =
-  "inline-flex w-full items-center justify-center gap-2 rounded-lg bg-accent px-4 py-2.5 text-sm font-semibold text-accent-foreground transition hover:bg-accent-hover disabled:cursor-not-allowed disabled:opacity-60";
-
-const secondaryButtonClass =
-  "inline-flex w-full items-center justify-center gap-2 rounded-lg border border-border bg-transparent px-4 py-2.5 text-sm font-medium text-muted transition hover:border-accent/50 hover:text-foreground";
 
 export default function HomePage() {
   const [step, setStep] = useState<Step>("company");
@@ -137,44 +131,80 @@ export default function HomePage() {
   }
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center px-4 py-12">
-      <div className="w-full max-w-md animate-fade-in-up">
-        <BrandHeader />
+    <main className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden px-4 py-12">
+      <div className="pointer-events-none fixed inset-0 -z-10">
+        <GradientWaves
+          horizonColor="#0a0a0b"
+          waveColor="#7a3410"
+          crestColor="#ff6a1a"
+          speed={0.32}
+          amplitude={2.2}
+          waveScale={0.55}
+          waveRatio={0.9}
+          swell={28}
+          turbulence={16}
+          tilt={1.1}
+          zoom={1}
+          height={5.5}
+          fogDepth={14}
+          detail="medium"
+          brightness={0.85}
+          opacity={0.32}
+          mouseInteraction={false}
+          grain
+          grainIntensity={0.035}
+        />
+      </div>
 
-        <div className="mt-8 rounded-2xl border border-border bg-surface p-6 shadow-2xl shadow-black/40 sm:p-8">
-          {step === "company" && (
-            <CompanyStep
-              value={companyInput}
-              onChange={setCompanyInput}
-              onSubmit={handleCompanySubmit}
-              error={companyError}
-              loading={companyLoading}
-            />
-          )}
+      <div className="w-full max-w-md">
+        <Reveal delay={0}>
+          <BrandHeader />
+        </Reveal>
 
-          {step === "form" && (
-            <TicketFormStep
-              companyName={companyName}
-              demandTypes={demandTypes}
-              form={form}
-              onChange={setForm}
-              onSubmit={handleFormSubmit}
-              onBack={handleChangeCompany}
-              error={formError}
-              loading={formLoading}
-            />
-          )}
+        <Reveal delay={90}>
+          <div className="mt-8 rounded-2xl border border-border bg-surface p-6 shadow-2xl shadow-[0_0_60px_-15px_rgba(255,106,26,0.35)] sm:p-8">
+            {step === "company" && (
+              <CompanyStep
+                value={companyInput}
+                onChange={setCompanyInput}
+                onSubmit={handleCompanySubmit}
+                error={companyError}
+                loading={companyLoading}
+              />
+            )}
 
-          {step === "success" && (
-            <SuccessStep onNewTicket={handleNewTicket} onChangeCompany={handleChangeCompany} />
-          )}
-        </div>
+            {step === "form" && (
+              <TicketFormStep
+                companyName={companyName}
+                demandTypes={demandTypes}
+                form={form}
+                onChange={setForm}
+                onSubmit={handleFormSubmit}
+                onBack={handleChangeCompany}
+                error={formError}
+                loading={formLoading}
+              />
+            )}
 
-        <p className="mt-6 text-center text-xs text-muted">
-          Flecha Consultoria &middot; Central de Tickets
-        </p>
+            {step === "success" && <SuccessStep onNewTicket={handleNewTicket} />}
+          </div>
+        </Reveal>
+
+        <Reveal delay={160}>
+          <p className="mt-6 text-center text-xs text-muted">
+            Flecha Consultoria &middot; Central de Tickets
+          </p>
+        </Reveal>
       </div>
     </main>
+  );
+}
+
+function Reveal({ delay = 0, children }: { delay?: number; children: ReactNode }) {
+  return (
+    <div className="animate-fade-in-up" style={{ animationDelay: `${delay}ms` }}>
+      {children}
+    </div>
   );
 }
 
@@ -221,26 +251,30 @@ interface CompanyStepProps {
 function CompanyStep({ value, onChange, onSubmit, error, loading }: CompanyStepProps) {
   return (
     <form onSubmit={onSubmit} className="flex flex-col gap-4">
-      <div>
-        <label htmlFor="companyName" className={labelClass}>
-          Nome da empresa
-        </label>
-        <input
-          id="companyName"
-          type="text"
-          className={inputClass}
-          placeholder="Digite o nome da sua empresa"
-          value={value}
-          onChange={(event) => onChange(event.target.value)}
-          autoFocus
-        />
-      </div>
+      <Reveal delay={0}>
+        <div>
+          <label htmlFor="companyName" className={labelClass}>
+            Nome da empresa
+          </label>
+          <input
+            id="companyName"
+            type="text"
+            className={inputClass}
+            placeholder="Digite o nome da sua empresa"
+            value={value}
+            onChange={(event) => onChange(event.target.value)}
+            autoFocus
+          />
+        </div>
+      </Reveal>
 
       {error && <p className="text-sm text-danger">{error}</p>}
 
-      <button type="submit" className={primaryButtonClass} disabled={loading}>
-        {loading ? "Verificando..." : "Continuar"}
-      </button>
+      <Reveal delay={60}>
+        <button type="submit" className={primaryButtonClass} disabled={loading}>
+          {loading ? "Verificando..." : "Continuar"}
+        </button>
+      </Reveal>
     </form>
   );
 }
@@ -268,129 +302,143 @@ function TicketFormStep({
 }: TicketFormStepProps) {
   return (
     <form onSubmit={onSubmit} className="flex flex-col gap-4">
-      <div>
-        <span className={labelClass}>Empresa</span>
-        <div className="rounded-lg border border-border bg-surface-2/60 px-3 py-2.5 text-sm text-foreground">
-          {companyName}
-        </div>
-      </div>
-
-      <div>
-        <label htmlFor="demandType" className={labelClass}>
-          Tipo de demanda
-        </label>
-        <select
-          id="demandType"
-          className={inputClass}
-          value={form.demandType}
-          onChange={(event) => onChange({ ...form, demandType: event.target.value })}
-        >
-          {demandTypes.map((type) => (
-            <option key={type} value={type}>
-              {type}
-            </option>
-          ))}
-        </select>
-      </div>
-
-      <div>
-        <label htmlFor="titulo" className={labelClass}>
-          Título/resumo da solicitação
-        </label>
-        <input
-          id="titulo"
-          type="text"
-          className={inputClass}
-          placeholder="Ex: Atualizar campanha de tráfego pago"
-          value={form.titulo}
-          onChange={(event) => onChange({ ...form, titulo: event.target.value })}
-        />
-      </div>
-
-      <div>
-        <label htmlFor="descricao" className={labelClass}>
-          Descrição detalhada
-        </label>
-        <textarea
-          id="descricao"
-          className={`${inputClass} min-h-32 resize-y`}
-          placeholder="Descreva a solicitação com o máximo de detalhes possível"
-          value={form.descricao}
-          onChange={(event) => onChange({ ...form, descricao: event.target.value })}
-        />
-      </div>
-
-      <div className="grid grid-cols-2 gap-4">
+      <Reveal delay={0}>
         <div>
-          <label htmlFor="prazo" className={labelClass}>
-            Prazo desejado
-          </label>
-          <input
-            id="prazo"
-            type="date"
-            className={inputClass}
-            value={form.prazo}
-            onChange={(event) => onChange({ ...form, prazo: event.target.value })}
-          />
+          <span className={labelClass}>Empresa</span>
+          <div className="rounded-lg border border-border bg-surface-2/60 px-3 py-2.5 text-sm text-foreground">
+            {companyName}
+          </div>
         </div>
+      </Reveal>
 
+      <Reveal delay={40}>
         <div>
-          <label htmlFor="prioridade" className={labelClass}>
-            Prioridade
+          <label htmlFor="demandType" className={labelClass}>
+            Tipo de demanda
           </label>
           <select
-            id="prioridade"
+            id="demandType"
             className={inputClass}
-            value={form.prioridade}
-            onChange={(event) => onChange({ ...form, prioridade: event.target.value })}
+            value={form.demandType}
+            onChange={(event) => onChange({ ...form, demandType: event.target.value })}
           >
-            <option value="">Não informar</option>
-            <option value="baixa">Baixa</option>
-            <option value="media">Média</option>
-            <option value="alta">Alta</option>
+            {demandTypes.map((type) => (
+              <option key={type} value={type}>
+                {type}
+              </option>
+            ))}
           </select>
         </div>
-      </div>
+      </Reveal>
+
+      <Reveal delay={80}>
+        <div>
+          <label htmlFor="titulo" className={labelClass}>
+            Título/resumo da solicitação
+          </label>
+          <input
+            id="titulo"
+            type="text"
+            className={inputClass}
+            placeholder="Ex: Atualizar campanha de tráfego pago"
+            value={form.titulo}
+            onChange={(event) => onChange({ ...form, titulo: event.target.value })}
+          />
+        </div>
+      </Reveal>
+
+      <Reveal delay={120}>
+        <div>
+          <label htmlFor="descricao" className={labelClass}>
+            Descrição detalhada
+          </label>
+          <textarea
+            id="descricao"
+            className={`${inputClass} min-h-32 resize-y`}
+            placeholder="Descreva a solicitação com o máximo de detalhes possível"
+            value={form.descricao}
+            onChange={(event) => onChange({ ...form, descricao: event.target.value })}
+          />
+        </div>
+      </Reveal>
+
+      <Reveal delay={160}>
+        <div className="grid grid-cols-2 gap-4">
+          <div>
+            <label htmlFor="prazo" className={labelClass}>
+              Prazo desejado
+            </label>
+            <DatePicker
+              id="prazo"
+              value={form.prazo}
+              onChange={(value) => onChange({ ...form, prazo: value })}
+            />
+          </div>
+
+          <div>
+            <label htmlFor="prioridade" className={labelClass}>
+              Prioridade
+            </label>
+            <select
+              id="prioridade"
+              className={inputClass}
+              value={form.prioridade}
+              onChange={(event) => onChange({ ...form, prioridade: event.target.value })}
+            >
+              <option value="">Não informar</option>
+              <option value="baixa">Baixa</option>
+              <option value="media">Média</option>
+              <option value="alta">Alta</option>
+            </select>
+          </div>
+        </div>
+      </Reveal>
 
       {error && <p className="text-sm text-danger">{error}</p>}
 
-      <div className="mt-2 flex flex-col gap-3">
-        <button type="submit" className={primaryButtonClass} disabled={loading}>
-          {loading ? "Enviando..." : "Enviar solicitação"}
-        </button>
-        <button type="button" className={secondaryButtonClass} onClick={onBack} disabled={loading}>
-          Voltar
-        </button>
-      </div>
+      <Reveal delay={200}>
+        <div className="mt-2 flex flex-col gap-3">
+          <button type="submit" className={primaryButtonClass} disabled={loading}>
+            {loading ? "Enviando..." : "Enviar solicitação"}
+          </button>
+          <button type="button" className={secondaryButtonClass} onClick={onBack} disabled={loading}>
+            Voltar
+          </button>
+        </div>
+      </Reveal>
     </form>
   );
 }
 
 interface SuccessStepProps {
   onNewTicket: () => void;
-  onChangeCompany: () => void;
 }
 
-function SuccessStep({ onNewTicket, onChangeCompany }: SuccessStepProps) {
+function SuccessStep({ onNewTicket }: SuccessStepProps) {
   return (
     <div className="flex flex-col items-center gap-4 text-center">
-      <div className="flex h-12 w-12 items-center justify-center rounded-full bg-success/10 text-success">
-        <svg viewBox="0 0 24 24" className="h-6 w-6" fill="none" stroke="currentColor" strokeWidth={2}>
-          <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-        </svg>
-      </div>
-      <h2 className="text-lg font-semibold text-foreground">Solicitação registrada com sucesso</h2>
-      <p className="text-sm text-muted">
-        Sua demanda foi enviada para a equipe da Flecha Consultoria e já está no quadro de trabalho.
-      </p>
-      <div className="mt-2 flex w-full flex-col gap-3">
-        <button type="button" className={primaryButtonClass} onClick={onNewTicket}>
-          Abrir nova solicitação
-        </button>
-        <button type="button" className={secondaryButtonClass} onClick={onChangeCompany}>
-          Trocar empresa
-        </button>
-      </div>
+      <Reveal delay={0}>
+        <div className="flex h-12 w-12 items-center justify-center rounded-full bg-success/10 text-success">
+          <svg viewBox="0 0 24 24" className="h-6 w-6" fill="none" stroke="currentColor" strokeWidth={2}>
+            <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+          </svg>
+        </div>
+      </Reveal>
+      <Reveal delay={60}>
+        <h2 className="text-lg font-semibold text-foreground">Solicitação registrada com sucesso</h2>
+      </Reveal>
+      <Reveal delay={100}>
+        <p className="text-sm text-muted">
+          Sua demanda foi enviada para a equipe da Flecha Consultoria e já está no quadro de trabalho.
+        </p>
+      </Reveal>
+      <Reveal delay={140}>
+        <div className="mt-2 flex w-full flex-col gap-3">
+          <button type="button" className={primaryButtonClass} onClick={onNewTicket}>
+            Abrir nova solicitação
+          </button>
+        </div>
+      </Reveal>
     </div>
   );
 }
